@@ -1,0 +1,190 @@
+:root {
+  --paper: #f4f2ee;
+  --ink: #111111;
+  --gray: #7a7a7a;
+  --riso-pink: #ff3ea5;
+  --sidebar-w: 30%;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ===== split layout ===== */
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* left column — fixed, does not scroll with the page */
+.sidebar {
+  width: var(--sidebar-w);
+  min-width: 18rem;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.wordmark {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.sidebar-top h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0 0 1rem;
+}
+
+.sidebar-top .intro {
+  max-width: 26rem;
+  font-size: 0.95rem;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.95rem;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  padding: 0.9rem 0;
+}
+
+.filters a {
+  width: fit-content;
+  border-bottom: 2px solid transparent;
+}
+
+.filters a.active,
+.filters a:hover {
+  border-bottom-color: var(--riso-pink);
+}
+
+.tags {
+  font-size: 0.8rem;
+  color: var(--gray);
+  max-width: 26rem;
+}
+
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sidebar-bottom .email {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  width: fit-content;
+  border-bottom: 3px solid var(--riso-pink);
+}
+
+.sidebar-bottom .socials {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+}
+
+.sidebar-bottom .socials a { border-bottom: 1px solid var(--ink); }
+
+.address, .copyright {
+  font-size: 0.8rem;
+  color: var(--gray);
+  margin: 0;
+}
+
+/* right column — the scrollable project index */
+.grid {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  align-content: start;
+  background: var(--ink);
+}
+
+.item {
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+}
+
+.item .tile {
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #000;
+}
+
+.item .tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.item .caption {
+  padding: 0.6rem 0.7rem 1rem;
+}
+
+.item .caption .title {
+  display: block;
+  font-weight: 500;
+  font-size: 0.85rem;
+  margin-bottom: 0.2rem;
+}
+
+.item .caption .meta {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--gray);
+  line-height: 1.4;
+}
+
+/* thin scrollbars */
+.grid::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar { width: 8px; }
+.grid::-webkit-scrollbar-thumb,
+.sidebar::-webkit-scrollbar-thumb { background: var(--riso-pink); }
+.grid::-webkit-scrollbar-track,
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+
+@media (max-width: 900px) {
+  .layout { flex-direction: column; height: auto; overflow: visible; }
+  html, body { height: auto; }
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    overflow-y: visible;
+  }
+  .grid {
+    height: auto;
+    overflow-y: visible;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
