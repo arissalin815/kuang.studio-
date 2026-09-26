@@ -1,6 +1,5 @@
 # Arissa — Portfolio
 
-A riso-print-inspired portfolio site: plain HTML/CSS/JS, no build step.
 
 ## Files
 - `index.html` — page structure and copy (hero, about, contact)
